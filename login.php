@@ -36,7 +36,7 @@
     } else {
         echo "<input type='hidden' id='checkError'>";
     } ?>
-    <div id="modalLogin" class="modal modal-fixed-footer">
+    <div id="modal1" class="modal modal-fixed-footer">
         <div class="modal-content">
         <h3>Something happened. &#128531;</h3><br>
         <p>There could be number of ways how this error occured. Some of them are listed below;</p>

@@ -53,6 +53,17 @@
             return $data_return;
         }
 
+        public function Latest() {
+            $sql = "SELECT * FROM books ORDER BY book_timestamp DESC LIMIT 1";
+            $result = $this->theQuery($sql);
+            $result->fetch_all();
+            foreach($result as $data) {
+                $data_return[] = $data;
+            }
+
+            return $data_return;
+        }
+
         public function getThisBook($id) {
             $sql = "SELECT * FROM books where id='$id'";
             $result = $this->theQuery($sql);
@@ -67,16 +78,22 @@
             $this->file_tmp_name = $file_tmp_name;
             $this->file_name = $file_name;
 
+            if(strlen($this->book_summary) > 250) {
+                return false;
+            }
+
+            $check_ext = explode('.', $this->file_name);
+            
+            if($check_ext[1] != 'pdf') {
+                return false;
+            }
+
             $dir = "storage/" . $this->file_name;
-            move_uploaded_file($this->file_tmp_name, $dir);
-
-            date_default_timezone_set("Asia/Kuala_Lumpur");
-
-            $date = date('Y-m-d H:i:s');
 
             $sql = "INSERT INTO books VALUES (null, '$dir', '$this->book_name', '$this->book_author', '$this->book_publisher', '$this->book_category', '$this->book_summary', null)";
             
             if($this->theQuery($sql)) {
+                move_uploaded_file($this->file_tmp_name, $dir);
                 return true;
             } else {
                 return false;

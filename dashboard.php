@@ -8,10 +8,11 @@
 
     include('php/app.inc.php');
 
-    $getAllBoosk = new books;
+    $getAllBooks = new books;
 
-    $totalBooks = count($getAllBoosk->getAllBooks());
+    $totalBooks = count($getAllBooks->getAllBooks());
 
+    $getLatestResult = $getAllBooks->Latest();
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -31,7 +32,7 @@
         <div class="col s4"></div>
         <div class="col s4"></div>
         <div class="col s4 center-align"><form method="post">
-        <button type="submit" class="btn" name="logout">Logout</button>
+        <button type="submit" class="btn red lighten-2" name="logout">Logout</button>
     </form></div>
     </div>
     <div class="container">
@@ -51,13 +52,24 @@
             <div class="col l6 s12">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
-                        <span class="card-title">Check books</span><br>
-
-                        <p>Uploaded books: <strong><?php echo $totalBooks; ?></strong></p>
+                        <span class="card-title">Latest book!</span><br>
+                        <div class="row">
+                            <div class="col s12 l3">
+                                <p>Book Name</p>
+                                <p>Book Author</p>
+                                <p>Book Category</p>
+                                <p>Book Publisher</p>
+                            </div>
+                            <div class="col s12 l9">
+                                <strong><p><?php echo $getLatestResult[0]['book_name'] ?></p></strong>
+                                <strong><p><?php echo $getLatestResult[0]['book_author'] ?></p></strong>
+                                <strong><p><?php echo $getLatestResult[0]['book_category'] ?></p></strong>
+                                <strong><p><?php echo $getLatestResult[0]['book_publisher'] ?></p></strong>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-action">
-                        <a href="#">This is a link</a>
-                        <a href="#">This is a link</a>
+                        <a href="adminbrowse.php">Browse Books</a>
                     </div>
                 </div>
             </div>

@@ -23,9 +23,10 @@
         
         if($checkfile) {
             echo "Success";
+        } else {
+            header("Location: uploadbook.php?error=yes");
         }
     }
-
 
 ?>
 
@@ -34,12 +35,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library</title>
+    <title>Upload</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body class="teal lighten-3">
+    <?php if(isset($_GET['error']) == 'yes') {
+        echo "<input type='hidden' value='error' id='checkError'>";
+    } else {
+        echo "<input type='hidden' id='checkError'>";
+    } ?>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h3>Something happened. &#128531;</h3><br>
+            <p>There could be number of ways how this error occured. Some of them are listed below;</p>
+            <ul class="collection">
+                <li class="collection-item">Your <strong>summary</strong> is more than 250 characters</li>
+                <li class="collection-item">Your file extension cannot be other than <strong>pdf</strong></li>
+            </ul><br>
+            <h6>Other than that, the most aggravated, the server might experiencing some problems. &#128552;</h6>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat red-text">Close</a>
+        </div>
+    </div>
     <?php include_once('php/navbar.php') ?>
     <div class="container">
         <form method="post" enctype="multipart/form-data">
@@ -47,6 +68,9 @@
                 <h3 class="header">Upload a book</h3>
                 <div class="card horizontal">
                     <div class="card-stacked">
+                    <div class="right-align">
+                        <a href="dashboard.php" class="btn-large red lighten-2">Back to Dashboard</a>
+                    </div>
                         <div class="card-content">
                             <div class="row">
                                 <div class="input-field col s12">
