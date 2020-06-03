@@ -79,7 +79,7 @@
                     foreach($books_return as $book) {
                 ?>
                 <li class="collection-item">
-                    <div><h6><strong><?php echo $book['book_name']; ?></strong></h6><a target="_blank" href="<?php echo $book['book_url'] ?>" class="secondary-content"><i class="material-icons">send</i></a>
+                    <div><h6><strong><?php echo $book['book_name']; ?></strong></h6><a href="<?php echo $book['book_url'] ?>" class="secondary-content"><i class="material-icons">send</i></a>
                     <p>by <?php echo $book['book_author'] ?></p>
                 </div>
                 </li>

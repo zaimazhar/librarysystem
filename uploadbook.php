@@ -17,9 +17,10 @@
         $book_summary = $_POST['book_summary'];
         $book_publisher = $_POST['book_publisher'];
         $file_name = $_FILES['book_file']['name'];
+        $file_type = $_FILES['book_file']['type'];
         $dir = "storage/" . $file_name;
         $file = $_FILES['book_file']['tmp_name'];
-        $checkfile = $uploadbook->insertBook($book_name, $book_author, $book_category, $book_publisher, $book_summary, $file, $file_name);
+        $checkfile = $uploadbook->insertBook($book_name, $book_author, $book_category, $book_publisher, $book_summary, $file, $file_name, $file_type);
         
         if($checkfile) {
             header("Location: uploadbook.php");

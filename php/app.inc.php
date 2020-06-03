@@ -33,6 +33,7 @@
         private $book_url;
         private $file_name;
         private $file_tmp_name;
+        private $file_type;
 
         private $max_page;
         private $curr_page;
@@ -121,7 +122,7 @@
             return $this->ceiling_total_page;
         }
 
-        public function insertBook($book_name, $book_author, $book_category, $book_publisher, $book_summary, $file_tmp_name, $file_name) {
+        public function insertBook($book_name, $book_author, $book_category, $book_publisher, $book_summary, $file_tmp_name, $file_name, $file_type) {
             $this->book_name = $book_name;
             $this->book_author = $book_author;
             $this->book_category = $book_category;
@@ -129,16 +130,15 @@
             $this->book_summary = $book_summary;
             $this->file_tmp_name = $file_tmp_name;
             $this->file_name = $file_name;
+            $this->file_type = $file_type;
 
             if(strlen($this->book_summary) > 250) {
                 return false;
             }
-
-            // $check_ext = explode('.', $this->file_name);
             
-            // if($check_ext[1] != 'pdf') {
-            //     return false;
-            // }
+            if($this->file_type != 'application/pdf') {
+                return false;
+            }
 
             $dir = "storage/" . $this->file_name;
 

@@ -75,10 +75,10 @@
                                 <p>Book Publisher</p>
                             </div>
                             <div class="col s12 l9">
-                                <strong><p><?php echo $getLatestResult[0]['book_name'] ?></p></strong>
-                                <strong><p><?php echo $getLatestResult[0]['book_author'] ?></p></strong>
-                                <strong><p><?php echo $getLatestResult[0]['book_category'] ?></p></strong>
-                                <strong><p><?php echo $getLatestResult[0]['book_publisher'] ?></p></strong>
+                                <strong><p class="truncate"><?php echo $getLatestResult[0]['book_name'] ?></p></strong>
+                                <strong><p class="truncate"><?php echo $getLatestResult[0]['book_author'] ?></p></strong>
+                                <strong><p class="truncate"><?php echo $getLatestResult[0]['book_category'] ?></p></strong>
+                                <strong><p class="truncate"><?php echo $getLatestResult[0]['book_publisher'] ?></p></strong>
                             </div>
                             <?php } else { ?>
                                 
