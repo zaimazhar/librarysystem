@@ -5,7 +5,10 @@
     include('php/app.inc.php');
 
     $now_db = new books();
-    
+
+    $books = $now_db->fiveLatest();
+
+    $books = $books != null ? $books : [];
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +29,10 @@
         <br><br>
         <h5 class="article">Check out our top 5 recent books!</h5><br>
         <ul class="collection">
-            <?php foreach($now_db->fiveLatest() as $data) { ?>
+            <?php 
+            foreach($books as $data) { 
+                
+                ?>
             <li class="collection-item avatar">
                 <span class="title"><strong><?php echo $data['book_name'] ?></strong> by <?php echo $data['book_author'] ?></span>
                 <div></div><br>

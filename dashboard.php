@@ -15,9 +15,13 @@
 
     $getAllBooks = new books;
 
-    $totalBooks = count($getAllBooks->getAllBooks());
+    $totalBooks = $getAllBooks->getAllBooks();
+
+    $totalBooks = !empty($totalBooks) ? $totalBooks : null;
 
     $getLatestResult = $getAllBooks->Latest();
+
+    $getLatestResult = !empty($getLatestResult) ? $getLatestResult : null;
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +51,7 @@
                     <div class="card-content white-text">
                         <span class="card-title">Upload a new book</span><br>
 
-                        <p>Uploaded books: <strong><?php echo $totalBooks; ?></strong></p>
+                        <p>Uploaded books: <strong><?php if($totalBooks != null) { echo count($totalBooks); } else { echo "0"; } ?></strong></p>
                     </div>
                     <div class="card-action">
                         <a href="uploadbook.php">Upload</a>
@@ -59,6 +63,11 @@
                     <div class="card-content white-text">
                         <span class="card-title">Latest book!</span><br>
                         <div class="row">
+                            <?php
+
+                            if($getLatestResult != null) {
+
+                            ?>
                             <div class="col s12 l3">
                                 <p>Book Name</p>
                                 <p>Book Author</p>
@@ -71,6 +80,13 @@
                                 <strong><p><?php echo $getLatestResult[0]['book_category'] ?></p></strong>
                                 <strong><p><?php echo $getLatestResult[0]['book_publisher'] ?></p></strong>
                             </div>
+                            <?php } else { ?>
+                                
+                            <div class="col s12 l12">
+                                <h5>No data...</h5>
+                            </div>
+
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="card-action">

@@ -52,7 +52,11 @@
                 }
             }
 
-            return $data_return;
+            if(!empty($data_return)) {
+                return $data_return;
+            } else {
+                return null;
+            }
         }
 
         public function fiveLatest() {
@@ -63,7 +67,12 @@
                 $data_return[] = $data;
             }
 
-            return $data_return; // Returns array!
+            if(!empty($data_return)) 
+            {
+                return $data_return; // Returns array!
+            } else {
+                return null;
+            }
         }
 
         public function Latest() {
@@ -74,7 +83,11 @@
                 $data_return[] = $data;
             }
 
-            return $data_return;
+            if(!empty($data_return)) {
+                return $data_return;
+            } else {
+                return null;
+            }
         }
 
         public function getThisPage($get_name = null, $get_page, $limit_data_per_page) {
@@ -121,11 +134,11 @@
                 return false;
             }
 
-            $check_ext = explode('.', $this->file_name);
+            // $check_ext = explode('.', $this->file_name);
             
-            if($check_ext[1] != 'pdf') {
-                return false;
-            }
+            // if($check_ext[1] != 'pdf') {
+            //     return false;
+            // }
 
             $dir = "storage/" . $this->file_name;
 
