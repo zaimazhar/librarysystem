@@ -22,7 +22,7 @@
         $checkfile = $uploadbook->insertBook($book_name, $book_author, $book_category, $book_publisher, $book_summary, $file, $file_name);
         
         if($checkfile) {
-            echo "Success";
+            header("Location: uploadbook.php");
         } else {
             header("Location: uploadbook.php?error=yes");
         }
@@ -95,7 +95,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <i class="material-icons prefix">folder</i>
+                                    <i class="material-icons prefix">format_paint</i>
                                     <input id="icon_prefix_book_publisher" name="book_publisher" type="text" class="validate">
                                     <label for="icon_prefix_book_publisher">Book Publisher</label>
                                 </div>

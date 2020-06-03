@@ -5,6 +5,12 @@
         private $conn_password = "Zaimzaim1@";
         private $conn_host = "localhost";
         private $conn_db = "php_library";
+
+        // private $conn_name = "id13930654_zaimazhar97";
+        // private $conn_password = "2jk=gc7kz!EQ((Z[";
+        // private $conn_host = "localhost";
+        // private $conn_db = "id13930654_php_library";
+
         protected $result;
 
         protected function dbh() {
@@ -28,6 +34,13 @@
         private $file_name;
         private $file_tmp_name;
 
+        private $max_page;
+        private $curr_page;
+        private $total_data;
+        private $total_pages;
+        private $ceiling_total_page;
+        private $curr_page_data;
+
         public function getAllBooks() {
             $sql = "SELECT * FROM books";
             $result = $this->theQuery($sql);
@@ -50,7 +63,7 @@
                 $data_return[] = $data;
             }
 
-            return $data_return;
+            return $data_return; // Returns array!
         }
 
         public function Latest() {
@@ -64,9 +77,35 @@
             return $data_return;
         }
 
-        public function getThisBook($id) {
-            $sql = "SELECT * FROM books where id='$id'";
-            $result = $this->theQuery($sql);
+        public function getThisPage($get_name = null, $get_page, $limit_data_per_page) {
+            $this->book_name = $get_name;
+            $this->curr_page = $get_page;
+            $this->max_page = $limit_data_per_page;
+            $this->curr_page_data = ($this->curr_page - 1)*$this->max_page;
+            
+            if($get_name != null) {
+                $sql = "SELECT * FROM books WHERE book_name LIKE '%$this->book_name%' LIMIT $this->curr_page_data, $this->max_page";
+            } else {
+                $sql = "SELECT * FROM books LIMIT $this->curr_page_data, $this->max_page";
+            }
+
+            $books = $this->theQuery($sql);
+            return $books;
+        }
+
+        public function searchBooks($book_name = null) {
+            $this->book_name = mysqli_real_escape_string($this->dbh(), $book_name);
+            $sql = "SELECT * FROM books WHERE book_name LIKE '%$this->book_name%'";
+            return count($this->theQuery($sql)->fetch_all());
+        }
+
+        public function paginate($total_data, $max_per_page) {
+            $this->total_data = $total_data;
+            $this->max_page = $max_per_page;
+            $this->total_pages = $this->total_data / $this->max_page;
+            $this->ceiling_total_page = ceil($this->total_pages);
+
+            return $this->ceiling_total_page;
         }
 
         public function insertBook($book_name, $book_author, $book_category, $book_publisher, $book_summary, $file_tmp_name, $file_name) {
@@ -154,7 +193,6 @@
             if($sql_check_user_result->num_rows > 0) {
                 return false;
             }
-
 
             if(filter_var($this->register_email, FILTER_VALIDATE_EMAIL)) {
                 $result = $this->InsertIntoDB($this->register_username, $this->register_password, $this->register_email);
