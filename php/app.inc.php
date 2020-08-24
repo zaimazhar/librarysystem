@@ -6,7 +6,7 @@
         private $conn_host = "localhost";
         private $conn_db = "php_library";
 
-        // private $conn_name = "id13930654_zaimazhar97";
+        // private $conn_name = "";
         // private $conn_password = "2jk=gc7kz!EQ((Z[";
         // private $conn_host = "localhost";
         // private $conn_db = "id13930654_php_library";
