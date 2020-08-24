@@ -1,8 +1,8 @@
 <?php
 
     class db {
-        private $conn_name = "zaimazhar97";
-        private $conn_password = "Zaimzaim1@";
+        private $conn_name = "";
+        private $conn_password = ";
         private $conn_host = "localhost";
         private $conn_db = "php_library";
 
